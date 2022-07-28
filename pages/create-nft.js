@@ -1,4 +1,5 @@
-import { Button, Input } from "components";
+/* eslint-disable @next/next/no-img-element */
+import { Button, Input, Loader } from "components";
 import useMarketNft from "context/NFTContext";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,7 +9,7 @@ import images from "../assets";
 
 const CreateNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
-  const { createNFT, uploadToIPFS } = useMarketNft()
+  const { createNFT, uploadToIPFS, isLoadingNFT } = useMarketNft()
   const [formInput, setFormInput] = useState({
     price: "",
     name: "",
@@ -42,6 +43,13 @@ const CreateNFT = () => {
     `,
     [isDragActive, isDragAccept, isDragReject]
   );
+
+  if (isLoadingNFT)
+    return (
+      <div className="flexStart min-h-screen">
+        <Loader />
+      </div>
+    );
 
   return (
     <div className="flex justify-center sm:px-4 p-12">
@@ -79,8 +87,8 @@ const CreateNFT = () => {
             </div>
             {fileUrl && (
               <aside>
-                <div className="relative h-96 w-96">
-                  <Image src={fileUrl} alt="asset_file" layout="fill" />
+                <div className="h-96 w-96">
+                  <img className="h-96 w-96" src={fileUrl} alt="asset_file" />
                 </div>
               </aside>
             )}

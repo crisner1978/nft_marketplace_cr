@@ -6,12 +6,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const ResellNFT = () => {
-  const { createSale } = useMarketNft();
+  const { createSale, isLoadingNFT } = useMarketNft();
   const router = useRouter()
   const { tokenId, tokenURI } = router.query
   const [price, setPrice] = useState('')
   const [image, setImage] = useState('')
-  const [isLoading, setLoading] = useState(true)
 
   // const fetchNFT = async() => {
   //   const { data } = await axios.get(tokenURI)
@@ -26,13 +25,12 @@ const ResellNFT = () => {
         const { data } = await axios.get(tokenURI)
         // setPrice was here but not getting on the data so removed
         setImage(data.image)
-        setLoading(false)
       }
       fetchNFT()
     };
   }, [tokenURI])
 
-  if (isLoading)
+  if (isLoadingNFT)
     return (
       <div className="flexStart min-h-screen">
         <Loader />

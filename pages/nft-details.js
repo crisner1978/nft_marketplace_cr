@@ -9,7 +9,7 @@ import { shortenAddress } from "utils/shortenAddress";
 import images from "../assets";
 
 const NFTDetails = () => {
-  const { currentAccount, nftCurrency, buyNFT } = useMarketNft();
+  const { currentAccount, nftCurrency, buyNFT, isLoadingNFT } = useMarketNft();
   const [isLoading, setLoading] = useState(true);
   const [paymentModal, setPaymentModal] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
@@ -158,6 +158,20 @@ const NFTDetails = () => {
             </div>
           }
           handleClose={() => setSuccessModal(false)}
+        />
+      )}
+
+      {isLoadingNFT && (
+        <Modal
+          header="Buying NFT..."
+          body={
+          <div className="flexCenter flex-col text-center">
+            <div className="relative w-52 h-52">
+              <Loader />
+            </div>
+          </div>
+          }
+          handleClose={() => {}}
         />
       )}
     </div>

@@ -6,7 +6,7 @@ const Banner = ({ bannerText, parentStyles, childStyles, image }) => {
     <div
       className={`relative w-full flex items-center z-0 overflow-hidden nft-gradient ${parentStyles}`}>
       {image && (
-        <Image src="/profile_bg.jpg" alt="profile background" layout="fill" className="h-80 w-full" />
+        <Image src="/profile_bg.jpg" alt="profile background" layout="fill" objectFit="cover" className="h-80 w-full" priority />
       )}
       <p
         className={`font-bold text-5xl font-poppins leading-70 ${childStyles}`}>
